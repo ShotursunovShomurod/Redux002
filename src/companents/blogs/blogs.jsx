@@ -1,53 +1,31 @@
-import { Button, Card } from "antd";
+import { Button } from "antd";
+
 import React, { useState } from "react";
 import { Close } from "../close/close";
-import axios from "../../api/index";
 
 const Blogs = ({ data }) => {
+  console.log(data);
   const [show, setShow] = useState(false);
-
-  const handleCreate = (values) => {
-    const blog = {
-      title: values.title,
-      desc: values.desc,
-      phone: values.phone,
-    };
-    axios.post("/blogs", blog)
-      .then((res) => {
-        console.log(res);
-        setShow(false); 
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const items = data?.map((blog) => (
-    <Card
-      key={blog._id}
-      className="w-full"
-      hoverable
-      cover={<img alt="blog cover" src="https://via.placeholder.com/200" />}
-    >
-      <Card.Meta
-        title={blog.title}
-        description={blog.desc}
-      />
-    </Card>
+  let items = data?.map((blog) => (
+    <div key={blog._id} className="w-[200px] border p-4">
+      <h3 className="text-[18px] font-[500] text-[#0009]">{blog.title}</h3>
+      <p className="text-[14px] text-[#0005]">{blog.desc}</p>
+    </div>
   ));
-
+  const handleCreate = () => {
+    let blog = {
+      title: values,
+      desc: values,
+      phone: values,
+    };
+    axios.post("/blogs", blog);
+  };
   return (
     <div className="container mx-auto mt-8 mb-10">
-      <div className="flex justify-end mb-6">
-        <Button
-          type="primary"
-          size="large"
-          onClick={() => setShow(true)}
-        >
-          Add Blog
-        </Button>
-      </div>
-      <div className="grid gap-6 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
+      <Button onClick={() => setShow(true)} className="mb-6">
+        close
+      </Button>
+      <div className="grid gap-4 lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
         {items}
       </div>
       <Close show={show} setShow={setShow} handleCreate={handleCreate} />
