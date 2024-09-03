@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { CiLocationOn, CiHeart } from "react-icons/ci";
+import "./header.css";
+import { useDispatch } from "react-redux";
+import { CiHeart, CiLocationOn } from "react-icons/ci";
 import { IoCartOutline, IoPersonOutline } from "react-icons/io5";
 import { RiMenu2Fill } from "react-icons/ri";
 import { Link, NavLink } from "react-router-dom";
-import Logo from '../../assets/react.png'
+import logo from "../../assets/logo.png";
+
 const Header = () => {
-  const cart = useSelector((state) => state.cart);
-  const wishlist = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -16,84 +16,128 @@ const Header = () => {
   };
 
   return (
-    <>
-      <header className="bg-white shadow-md">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link to="/">
-            <img
-              className="w-32 h-12 object-contain"
-              src={Logo}
-              alt="Company Logo"
-            />
-          </Link>
+    <header className="container mx-auto py-4 px-4 md:px-0">
+      <div className="flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/">
+          <img className="w-[130px] h-[50px] object-contain" src={logo} alt="Logo" />
+        </Link>
 
-          <nav className={`flex items-center gap-4 ${isMenuOpen ? "flex" : "hidden"} sm:flex`}>
-            <NavLink
-              to="/wishlist"
-              className="flex items-center gap-1 text-gray-800"
-            >
-              <CiHeart className="text-2xl" />
-              <sup className="text-[18px] text-blue-300">{wishlist.length}</sup>
-              <span className="text-[#253D4E] font-bold text-sm">WISHLIST</span>
-            </NavLink>
-            <NavLink
-              to="/cart"
-              className="flex items-center gap-1 text-gray-800"
-            >
-              <IoCartOutline className="text-2xl" />
-              <sup className="text-[18px] text-blue-300">{cart.length}</sup>
-              <span className="text-[#253D4E] font-bold text-sm">CART</span>
-            </NavLink>
+        <nav className={`nav__collect flex-col md:flex-row gap-6 md:gap-4 ${isMenuOpen ? "show" : "hidden md:flex"}`}>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1">
+              <CiHeart className="text-[24px] text-[#253D4E] hover:text-[#00A859]" />
+              <NavLink
+                className="text-[16px] font-bold text-[#253D4E] hover:text-[#00A859] transition-colors"
+                to="/wishlist"
+              >
+                Wishlist
+              </NavLink>
+            </div>
+            <div className="flex items-center gap-1">
+              <IoCartOutline className="text-[24px] text-[#253D4E] hover:text-[#00A859]" />
+              <NavLink
+                className="text-[16px] font-bold text-[#253D4E] hover:text-[#00A859] transition-colors"
+                to="/cart"
+              >
+                Cart
+              </NavLink>
+            </div>
             <button
               onClick={() => dispatch({ type: "LOGOUT" })}
-              className="text-[#253D4E] font-bold text-sm"
+              className="text-[14px] font-bold text-[#253D4E] hover:text-[#00A859]"
             >
-              LOGOUT
+              Logout
             </button>
-          </nav>
+          </div>
+        </nav>
 
-          <button
-            onClick={toggleMenu}
-            className="text-2xl sm:hidden"
-          >
-            <RiMenu2Fill />
-          </button>
+        {/* Mobile Menu Toggle */}
+        <div onClick={toggleMenu} className="navbar__menu md:hidden text-[#253D4E] text-[24px] cursor-pointer">
+          <RiMenu2Fill />
         </div>
-      </header>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-white shadow-lg z-50 flex flex-col items-center py-4 sm:hidden">
-          <button
-            onClick={toggleMenu}
-            className="absolute top-4 right-4 text-2xl"
-          >
-            &times;
-          </button>
-          <NavLink
-            to="/wishlist"
-            className="text-gray-800 text-lg mb-4"
-            onClick={toggleMenu}
-          >
-            Wishlist
-          </NavLink>
-          <NavLink
-            to="/cart"
-            className="text-gray-800 text-lg mb-4"
-            onClick={toggleMenu}
-          >
-            Cart
-          </NavLink>
-          <button
-            onClick={() => dispatch({ type: "LOGOUT" })}
-            className="text-[#253D4E] font-bold text-lg"
-          >
-            LOGOUT
-          </button>
-        </div>
-      )}
-    </>
+      </div>
+    </header>
   );
 };
 
 export default Header;
+
+
+
+
+// import React, { useState } from "react";
+// import "./header.css";
+// import { useDispatch, useSelector } from "react-redux";
+// import { CiLocationOn } from "react-icons/ci";
+// import { CiHeart } from "react-icons/ci";
+// import { IoCartOutline } from "react-icons/io5";
+// import { IoPersonOutline } from "react-icons/io5";
+// import { RiMenu2Fill } from "react-icons/ri";
+// import { Link, NavLink } from "react-router-dom";
+// import logo from '../../assets/logo.png'
+
+
+// const Header = () => {
+
+//   const dispatch = useDispatch();
+//   const [isMenuOpen, setIsMenuOpen] = useState(false);
+//   const toggleMenu = () => {
+//     setIsMenuOpen(!isMenuOpen);
+//   };
+//   return (
+//     <>
+//       <div className="container mx-auto">
+//         <div className=" flex items-center  gap-[69px] justify-between mt-5">
+//           <Link to={"/"}>
+//             <img
+//               className="w-[130px] h-[50px] object-contain "
+//               src={logo}
+//               alt=""
+//             />
+//           </Link>
+
+//           <div
+//             className={`nav__collect flex  gap-3 ${isMenuOpen ? "show" : ""}`}
+//           >
+//             <div className="flex items-center gap-4 navbar navbar__collection">
+//               <div className="flex items-center gap-1">
+//                 <CiHeart className="text-[24px] " />
+//                 <NavLink
+//                   className={
+//                     "text-[16px] font-bold text-[#253D4E] lg:text-[#7e7e7e] "
+//                   }
+//                   to={"/wishlist"}
+//                 >
+//                   Wishlist
+//                 </NavLink>
+//               </div>
+//               <div className="flex items-center gap-1 navbar__collection">
+//                 <IoCartOutline className="text-[24px] " />
+//                 <NavLink
+//                   className={
+//                     "text-[16px] font-bold text-[#253D4E] lg:text-[#7e7e7e] "
+//                   }
+//                   to={"/Cart"}
+//                 >
+//                   Cart
+//                 </NavLink>
+//               </div>
+//               <button
+//                 onClick={() => dispatch({ type: "LOGOUT" })}
+//                 className="border-none outline-none text-[14px] font-[700] text-[#253D4E] pl-2"
+//               >
+//                 LOGOUT
+//               </button>
+//             </div>
+//           </div>
+//           <div onClick={toggleMenu} className="navbar__menu">
+//             <RiMenu2Fill />
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default Header;

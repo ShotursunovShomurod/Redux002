@@ -1,35 +1,12 @@
-import { useFetch } from "../../hooks/useFetch";
-import Products from "../../companents/product/products";
-import { Pagination } from "antd";
-import React, { useState } from "react";
+import { useFetch } from "../../companents/hooks/useFetch";
+import Blogs from "../../companents/blogs/blogs";
 
 const Home = () => {
-  const [skip, setSkip] = useState(1);
-  const [limit, setLimit] = useState(10);
-  const { data, loading } = useFetch(
-    "/products",
-    {
-      limit,
-      skip: (skip - 1) * limit,
-    },
-    [skip, limit]
-  );
-  const handlChange = (current, pageSize) => {
-    setLimit(pageSize);
-    setSkip(current);
-  };
+  const { data } = useFetch("/blogs", {}, []);
+
   return (
     <div>
-      {<Products data={data?.products} loading={loading} />}
-      <Pagination
-        current={skip}
-        onChange={handlChange}
-        className="mr-6"
-        align="end"
-        defaultCurrent={1}
-        defaultPageSize={limit}
-        total={data?.total}
-      />
+      <Blogs data={data?.payload} />
     </div>
   );
 };

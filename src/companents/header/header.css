@@ -1,0 +1,56 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  header {
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .nav__collect {
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .nav__collect.show {
+    display: flex;
+  }
+  
+  .navbar__menu {
+    display: flex;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .nav__collect {
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background-color: white;
+      width: 100%;
+      height: auto;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+      border-top: 1px solid #e0e0e0;
+      z-index: 1000;
+    }
+  
+    .navbar__menu {
+      display: flex;
+    }
+  }
+  
+  @media (min-width: 769px) {
+  
+    .navbar__menu {
+      display: none;
+    }
+  }
+  
+  nav a:hover, nav button:hover {
+    color: #00A859;
+  }
+  

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "../api/index";
+import axios from "../../api/index";
 
 export const useFetch = (path, params, deps = []) => {
   const [data, setData] = useState(null);
