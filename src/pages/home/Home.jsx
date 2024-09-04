@@ -1,6 +1,5 @@
-import { useFetch } from "../../companents/hooks/useFetch";
-import Blogs from "../../companents/blogs/blogs";
-
+import { useFetch } from "../../components/hooks/useFetch";
+import Blogs from "../../components/blogs/blogs";
 
 const Home = () => {
   const { data } = useFetch("/blogs", {}, []);

@@ -3,7 +3,7 @@ import { Button, Form, Input, message } from "antd";
 import axios from "../../api/index";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import Regester from "../../companents/regester/regester";
+import Regester from "../../components/regester/regester";
 const Login = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [loading, setLoading] = useState(false);
