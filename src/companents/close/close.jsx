@@ -73,7 +73,7 @@ export const Close = ({ show, setShow, handleCreate }) => {
 
             <Form.Item>
               <Button className="w-full" type="primary" htmlType="submit">
-                Sin up
+Create card
               </Button>
             </Form.Item>
           </Form>

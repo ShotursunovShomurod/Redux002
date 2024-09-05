@@ -1,12 +1,15 @@
 import React, { memo } from "react";
+import Logo from '../../assets/image.png'
 
 const Hero = () => {
   return (
-    <div className=" container mx-auto object-contain m-auto w-full border mt-10">
+    <div className="bg-black text-white">
+      <div className=" container mx-auto object-contain m-auto w-full py-10">
       <img
-        src="https://i0.wp.com/blogpascher.com/wp-content/uploads/2023/01/utiliser-des-images-sur-votre-blog-5.png?resize=874%2C560&ssl=1"
+        src={Logo}
         alt=""
-      />
+        />
+        </div>
     </div>
   );
 };

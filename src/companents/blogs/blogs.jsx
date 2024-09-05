@@ -11,7 +11,6 @@ const Blogs = ({ data }) => {
   const [reload, setReload] = useState(false);
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.profile);
-  // console.log(profile);
   useEffect(() => {
     axios.get("/admin/profile").then((res) => {
       dispatch({ type: "SET_PROFILE", payload: res.data.payload });
@@ -33,21 +32,26 @@ const Blogs = ({ data }) => {
     });
   };
   let items = blogs?.map((blog) => (
-    <div key={blog._id} className="w-[200px] bg-[#0009] border p-4 relative">
-      <h3 className="text-[18px] font-[500] text-[#fff] mt-[8px]">
-        {blog.title}
+    <div
+      key={blog._id}
+      className="w-[250px] bg-[#1e1e1e] hover:bg-[#292929] rounded-lg shadow-lg p-6 relative transition duration-300 ease-in-out cursor-pointer transform hover:-translate-y-1 hover:shadow-xl"
+    >
+      <h3 className="text-lg flex gap-2 font-semibold text-[#1e90ff] mb-2">
+        <span className="text-[#f0f0f0]">Title:</span> {blog.title}
       </h3>
-      <p className="text-[14px] mb-3  text-[#ddd]">{blog.desc}</p>
-      <p className=" text-[13px] py-[4px] px-3 bg-[#0004] text-[#fff] flex justify-center items-center mb-2 ">
-        {blog.userId.fname}
+      <p className="text-sm text-[#1e90ff] mb-3 flex gap-2">
+        <span className="text-[#f0f0f0]">Description:</span> {blog.desc}
+      </p>
+      <p className="text-sm flex gap-2 py-2 text-[#d3d3d3] mb-3">
+        <span className="text-[#1e90ff]">User Name:</span> {blog.userId.fname}
       </p>
       {profile?._id === blog.userId._id && (
         <Button
-          className="text-[12px]"
+          className="text-xs bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition duration-200 ease-in-out"
           type="primary"
           onClick={() => handlDelete(blog._id)}
         >
-          delete
+          Delete
         </Button>
       )}
     </div>
@@ -68,15 +72,19 @@ const Blogs = ({ data }) => {
       });
   };
   return (
-    <div className="container mx-auto mt-8 mb-10">
-      <Button onClick={() => setShow(true)} className="mb-6">
-        close
-      </Button>
+    <div className="bg-black text-white">
+      <div className="container mx-auto pt-8 py-10">
+        <div className="w-full flex justify-end">
+          <Button onClick={() => setShow(true)} className="mb-6">
+            Create card
+          </Button>
+        </div>
 
-      <div className="grid gap-4 lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
-        {items}
+        <div className="grid gap-4 lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
+          {items}
+        </div>
+        <Close show={show} setShow={setShow} handleCreate={handleCreate} />
       </div>
-      <Close show={show} setShow={setShow} handleCreate={handleCreate} />
     </div>
   );
 };

@@ -31,63 +31,73 @@ const Login = () => {
   };
 
   return (
-    <div className="flex h-screen items-center justify-center">
-      {contextHolder}
-      <div className=" w-[400px]">
-        <h3 className="text-center text-3xl mb-3">Login</h3>
-        <Form
-          className=""
-          name="basic"
-          layout="vertical"
-          initialValues={{
-            remember: true,
-          }}
-          onFinish={handleLogin}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
+<div className="flex h-screen items-center justify-center bg-gray-900">
+  {contextHolder}
+  <div className="w-[400px] bg-gray-800 p-8 rounded-lg shadow-lg">
+    <h3 className="text-center text-3xl font-semibold text-white mb-6">
+      Login
+    </h3>
+    <Form
+      name="basic"
+      layout="vertical"
+      initialValues={{
+        remember: true,
+      }}
+      onFinish={handleLogin}
+      onFinishFailed={onFinishFailed}
+      autoComplete="off"
+    >
+      <Form.Item
+        label={<span className="text-white">Username</span>}
+        name="username"
+        rules={[
+          {
+            required: true,
+            message: "Ism kiriting!",
+          },
+        ]}
+      >
+        <Input className="bg-gray-700 text-black border-none focus:ring-2 focus:ring-blue-500 rounded-md" />
+      </Form.Item>
+
+      <Form.Item
+        label={<span className="text-white">Password</span>}
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: "Please input your password!",
+          },
+        ]}
+      >
+        <Input.Password className="bg-gray-700 text-black border-none focus:ring-2 focus:ring-blue-500 rounded-md" />
+      </Form.Item>
+
+      <Form.Item>
+        <Button
+          disabled={loading}
+          className="w-full bg-blue-600 hover:bg-blue-700 text-black py-2 rounded-md transition duration-300"
+          type="primary"
+          htmlType="submit"
         >
-          <Form.Item
-            label="Username"
-            name="username"
-            rules={[
-              {
-                required: true,
-                message: "Ism kiriting!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
+          Submit
+        </Button>
+      </Form.Item>
 
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
-
-          <Form.Item>
-            <Button
-              disabled={loading}
-              className="w-full"
-              type="primary"
-              htmlType="submit"
-            >
-              Submit
-            </Button>
-          </Form.Item>
-
-          <button onClick={() => setShow(true)}> Register</button>
-        </Form>
+      <div className="text-center mt-4">
+        <span className="text-white">Don't have an account? </span>
+        <button
+          className="text-blue-400 hover:underline"
+          onClick={() => setShow(true)}
+        >
+          Register
+        </button>
       </div>
-      <Regester show={show} setShow={setShow} />
-    </div>
+    </Form>
+  </div>
+  <Regester show={show} setShow={setShow} />
+</div>
+
   );
 };
 export default memo(Login);
