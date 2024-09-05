@@ -84,7 +84,7 @@ const Login = () => {
         </Button>
       </Form.Item>
 
-      <div className="text-center mt-4">
+      <div className="text-center mt-5">
         <span className="text-white">Don't have an account? </span>
         <button
           className="text-blue-400 hover:underline"
